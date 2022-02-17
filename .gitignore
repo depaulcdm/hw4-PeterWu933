@@ -1,0 +1,8 @@
+hello-world/.gradle
+hello-world/build
+hello-world/lib
+hello-world/reports
+hello-world/target
+tools/build
+tools/ivy
+tools/src

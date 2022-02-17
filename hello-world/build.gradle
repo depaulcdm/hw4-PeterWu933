@@ -1,0 +1,16 @@
+group 'edu.depaul.cdm.se441'
+version '1.0-SNAPSHOT'
+
+/*
+TODO: Define the dependencies for both the compile and test
+scopes. We need the following dependencies:
+	
+log4j v.1.2.17 (for everything)
+junit v.4.12   (for testing only)
+
+Also make sure to configure the 'jar' task so that it looks
+similar to the one shown in class.
+
+Remember to use the 'java' plugin. You can reference the
+Maven Central repository.
+*/
