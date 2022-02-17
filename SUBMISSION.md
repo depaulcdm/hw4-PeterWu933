@@ -6,7 +6,9 @@
 
 Haodong Wu 2021355
 
-![Screen Shot 2022-02-17 at 4.40.25 PM](/Users/peterwu/Desktop/SE 441/Homework4/hw4-PeterWu933/Images/Screen Shot 2022-02-17 at 4.40.25 PM.png)
+```
+![Screen Capture #1](images/Screen Shot 2022-02-17 at 4.40.25 PM.jpg)
+```
 
 **HINT:** Embed your screen captures as requested in the sections below. You can embed the image using the following syntax:
 
