@@ -7,7 +7,7 @@
 Haodong Wu 2021355
 
 ```
-![Screen Capture #1](Images/Screen Shot 2022-02-17 at 4.40.25 PM.jpg)
+![ScreenShot](Images/Screen Shot 2022-02-17 at 4.40.25 PM.jpg)
 ```
 
 **HINT:** Embed your screen captures as requested in the sections below. You can embed the image using the following syntax:
