@@ -6,3 +6,4 @@ hello-world/target
 tools/build
 tools/ivy
 tools/src
+/bin/

@@ -7,26 +7,30 @@ scopes. We need the following dependencies:
 	
 log4j v.1.2.17 (for everything)
 junit v.4.12   (for testing only)
-
 Also make sure to configure the 'jar' task so that it looks
 similar to the one shown in class.
-
 Remember to use the 'java' plugin. You can reference the
 Maven Central repository.
 */
 
 apply plugin: 'java'
 
-dependencies {
-    implementation 'log4j: log4j v.1.2.17'
-    implementation 'junit: junit v.4.12'
+repositories {
+    mavenCentral()
 }
+
+dependencies {
+    implementation 'log4j:log4j:1.2.17'
+    implementation 'junit:junit:4.12'
+}
+
 jar {
     baseName = project.name + '-all'
-    from {
-        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    from{
+        configurations.runtimeClasspath.findAll {it.name.endsWith('jar')
+        }.collect {zipTree(it)}
     }
     manifest {
-        attributes 'Main-Class': 'hello.HelloWorld'
+        attributes 'Main-Class' : 'hello.HelloWorld'
     }
 }

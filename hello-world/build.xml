@@ -11,94 +11,95 @@
 	<property name="jar.file"          value="${build.dir}/${ant.project.name}-all-${version}.jar" />
 
 	<target name="clean">
-	  <delete dir="${build.dir}"/>
-	  <delete dir="${lib.dir}"/>
-	  <delete dir="${reports.dir}"/>
+		<delete dir="${build.dir}"/>
+		<delete dir="${lib.dir}"/>
+		<delete dir="${reports.dir}"/>
 	</target>
-	
-    <target name="resolve">
-	  <!--
-	  TODO:
-	  Perform an Ivy retrieve using a pathid of 'compile.classpath' and a pattern of
-	  '${ivy.lib.dir}/[conf]/[artifact].[ext]'.
-	  
-	  Create two cachefilesets: one for the 'compile' configuration and another for 
-	  the 'test' configuration. The ID of the first cachefileset should be 'compile.classpath'
-	  and the ID of the second should be 'test.classpath'.
-	  -->
+
+	<target name="resolve">
+		<!--
+        TODO:
+        Perform an Ivy retrieve using a pathid of 'compile.classpath' and a pattern of
+        '${ivy.lib.dir}/[conf]/[artifact].[ext]'.
+
+        Create two cachefilesets: one for the 'compile' configuration and another for
+        the 'test' configuration. The ID of the first cachefileset should be 'compile.classpath'
+        and the ID of the second should be 'test.classpath'.
+        -->
 		<ivy:retrieve pathid="compile.classpath" pattern="${ivy.lib.dir}/[conf]/[artifact].[ext]" />
-		<ivy:cachefileset setid="compile.classpath" conf="compile" />
+		<ivy:cachefileset setid="compile.classpath" conf="compile"/>
 		<ivy:cachefileset setid="test.classpath" conf="test" />
-    </target>
-	
+	</target>
+
 	<!--
 	TODO: Make this target depend on the 'clean' and 'resolve' targets.
 	-->
 	<target name="compile" depends="clean,resolve">
-	  <mkdir dir="${classes.dir}"/>
-	  <javac srcdir="${src.dir}" destdir="${classes.dir}">
-	    <!--
-		TODO: Define the classpath to be a combination of the 'compile.classpath' fileset
-		created by the "resolve" target above and a pathelement of the 'classes.dir' property.
-		-->
-		  <classpath>
-			   <fileset refid="compile.classpath"/>
-			   <pathelement path="${classes.dir}" />
-		  </classpath>
-	  </javac>
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}">
+			<!--
+            TODO: Define the classpath to be a combination of the 'compile.classpath' fileset
+            created by the "resolve" target above and a pathelement of the 'classes.dir' property.
+            -->
+			<classpath>
+				<fileset refid="compile.classpath"/>
+				<pathelement path="${classes.dir}"/>
+			</classpath>
+		</javac>
 	</target>
 
 	<!--
 	TODO: Make this target depend on the 'compile' target.
 	-->
-	<target name="test-compile" depends="compile">>
-	  <mkdir dir="${classes.test.dir}"/>
-	  <javac srcdir="${src.test.dir}" destdir="${classes.test.dir}">
-	    <!--
-		TODO: Define the classpath to be a combination of the 'test.classpath' fileset
-		created by the "resolve" target above, a pathelement of the 'classes.dir' property,
-		and a second pathelement of the 'classes.test.dir' property.
-		-->
-		  <classpath>
-			  <fileset refid="test.classpath"/>
-			  <pathelement path="${classes.dir}" />
-			  <pathelement path="${classes.test.dir}" />
-		  </classpath>
-	  </javac>
-	</target>
-
-	<target name="test" depends="test-compile">
-	  <mkdir dir="${reports.dir}"/>
-          <junit printsummary="yes" haltonfailure="yes">
-	    <!--
+	<target name="test-compile" depends="compile">
+		<mkdir dir="${classes.test.dir}"/>
+		<javac srcdir="${src.test.dir}" destdir="${classes.test.dir}">
+			<!--
             TODO: Define the classpath to be a combination of the 'test.classpath' fileset
             created by the "resolve" target above, a pathelement of the 'classes.dir' property,
             and a second pathelement of the 'classes.test.dir' property.
             -->
-			  <classpath>
-				  <fileset refid="test.classpath"/>
-				  <pathelement path="${classes.dir}" />
-				  <pathelement path="${classes.test.dir}" />
-			  </classpath>
-            <formatter type="plain" />        
-            <batchtest fork="yes" todir="${reports.dir}">
-              <fileset dir="${src.test.dir}">
-                <include name="**/*Test.java"/>
-              </fileset>
-            </batchtest>
-          </junit>
+			<classpath>
+				<fileset refid="test.classpath"/>
+				<pathelement path="${classes.dir}"/>
+				<pathelement path="${classes.test.dir}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="test" depends="test-compile">
+		<mkdir dir="${reports.dir}"/>
+		<junit printsummary="yes" haltonfailure="yes">
+			<!--
+                TODO: Define the classpath to be a combination of the 'test.classpath' fileset
+                created by the "resolve" target above, a pathelement of the 'classes.dir' property,
+                and a second pathelement of the 'classes.test.dir' property.
+                -->
+			<classpath>
+				<fileset refid="test.classpath"/>
+				<pathelement path="${classes.dir}"/>
+				<pathelement path="${classes.test.dir}"/>
+			</classpath>
+
+			<formatter type="plain" />
+			<batchtest fork="yes" todir="${reports.dir}">
+				<fileset dir="${src.test.dir}">
+					<include name="**/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
 	</target>
 
 	<!--
 	TODO: Make this target depend on the 'test' target.
 	-->
 	<target name="jar" depends="test">
-          <ivy:cachefileset setid="hello.runclasspath" conf="compile" />
-          <jar destfile="${jar.file}" basedir="${classes.dir}">
-            <manifest>
-              <attribute name="Main-Class" value="hello.HelloWorld"/>
-            </manifest>
-            <zipgroupfileset refid="hello.runclasspath"/>
-	  </jar>
+		<ivy:cachefileset setid="hello.runclasspath" conf="compile" />
+		<jar destfile="${jar.file}" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="hello.HelloWorld"/>
+			</manifest>
+			<zipgroupfileset refid="hello.runclasspath"/>
+		</jar>
 	</target>
 </project>

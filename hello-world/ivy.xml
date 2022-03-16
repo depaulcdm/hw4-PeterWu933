@@ -1,32 +1,32 @@
 <ivy-module version="2.0">
     <info organisation="edu.depaul.cdm.se441" module="hello-world"/>
-	<!--
-	TODO: Define two configurations: 'compile' and 'test'. The 'compile'
-	configuration should have public visibility while the 'test'
-	configuration should be private.
-	-->
-	<configurations>
+    <!--
+    TODO: Define two configurations: 'compile' and 'test'. The 'compile'
+    configuration should have public visibility while the 'test'
+    configuration should be private.
+    -->
+    <configurations>
         <conf name="compile" visibility="public" />
         <conf name="test" visibility="private" />
-	</configurations>
-	
-	<!--
-	TODO: Define the dependencies for both the compile and test
-	configurations. We need the following dependencies:
-	
-	log4j v.1.2.17 (uses the compile->default conf)
-	junit v.4.12   (uses the test->default conf)
-	
-	The structure of an Ivy dependency is as follows:
-	
+    </configurations>
+
+    <!--
+    TODO: Define the dependencies for both the compile and test
+    configurations. We need the following dependencies:
+
+    log4j v.1.2.17 (uses the compile->default conf)
+    junit v.4.12   (uses the test->default conf)
+
+    The structure of an Ivy dependency is as follows:
+
     <dependency conf="..." org="..." name="..." rev="..." />
-	
-	where org is the same as the Maven groupId, name is the same
-	as the Maven artifactId, and rev is the same as the Maven
-	version.
-	-->	
+
+    where org is the same as the Maven groupId, name is the same
+    as the Maven artifactId, and rev is the same as the Maven
+    version.
+    -->
     <dependencies defaultconf="compile">
-        <dependency conf="compile->default" org="org.apache.logging.log4j" name="log4j-api" rev="1.2.17"/>
+        <dependency conf="compile->default" org="log4j" name="log4j" rev="1.2.17"/>
         <dependency conf="test->default" org="junit" name="junit" rev="4.12"/>
     </dependencies>
 </ivy-module>
