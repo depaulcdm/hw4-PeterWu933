@@ -33,4 +33,5 @@ jar {
     manifest {
         attributes 'Main-Class' : 'hello.HelloWorld'
     }
+    
 }
